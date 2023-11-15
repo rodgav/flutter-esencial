@@ -1,6 +1,6 @@
-# [Flutter esencial](00x00_flutter_esencial.md)
+# [Flutter esencial](readme.md)
 
-¡Aprende a crear aplicaciones móviles increíbles con Flutter!
+¡Aprende a crear aplicaciones móviles increíbles con Flutter!
 
 ## 1. ¿Que es un widget?
 
