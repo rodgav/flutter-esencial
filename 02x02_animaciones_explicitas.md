@@ -107,3 +107,5 @@ class _ExplicitExampleState extends State<ExplicitExample>
 * `AnimatedModalBarrier` -> es una versión animada de `ModalBarrier`
 * `ListenableBuilder` -> utiliza un patrón de creación que es útil para casos de uso complejos `Listenable`
 * `AnimatedBuilder` -> utiliza un patrón de builder que es útil para casos de uso complejos de Animación
+
+### [Curves](https://api.flutter.dev/flutter/animation/Curves-class.html)
