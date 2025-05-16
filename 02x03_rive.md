@@ -4,9 +4,24 @@
 
 ## Rive
 
+config
+
+```yaml
+dependencies:
+  ...
+  rive: ^0.13.20
+
+flutter:
+  ...
+  assets:
+    - assets/animations/cat.riv
+    - assets/animations/fun_night.riv
+```
+
+Ejemplo de una rive
 ```dart
 class RiveExample extends StatefulWidget {
-  RiveExample({super.key});
+  const RiveExample({super.key});
 
   @override
   State<RiveExample> createState() => _RiveExampleState();
@@ -58,7 +73,6 @@ class _RiveExampleState extends State<RiveExample> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // disable the button while playing the animation
         onPressed: () => _isPlaying ? null : _controller.isActive = true,
         tooltip: 'Play',
         child: const Icon(Icons.arrow_upward),

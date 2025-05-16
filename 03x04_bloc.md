@@ -1,12 +1,18 @@
 # [Flutter esencial](readme.md)
 
-¡Aprende a crear aplicaciones móviles increíbles con Flutter!
+¡Aprende a crear aplicaciones móviles increíbles con Flutter!
 
 ## Bloc
+
+```yaml
+dependencies:
+  flutter_bloc: ^9.1.1
+```
 
 Primero saber que `bloc` tiene 4 elementos: bloc, event, state y la vista.
 
 el archivo `example_bloc.dart`
+
 ```dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -48,6 +54,7 @@ class ExampleBloc extends Bloc<ExampleEvent, ExampleState> {
 ```
 
 el archivo `example_event.dart`
+
 ```dart
 part of 'example_bloc.dart';
 
@@ -63,6 +70,7 @@ class ResetEvent extends ExampleEvent {}
 ```
 
 el archivo `example_state.dart`
+
 ```dart
 part of 'example_bloc.dart';
 
@@ -76,10 +84,11 @@ class ExampleInitial implements ExampleState {
   ExampleInitial({required this.counter});
 }
 
-class ExampleNone implements ExampleState{}
+class ExampleNone implements ExampleState {}
 ```
 
 el archivo `main.dart`
+
 ```dart
 
 class MyApp extends StatelessWidget {
@@ -87,9 +96,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: BlocProvider<ExampleBloc>(
-      create: (_) => ExampleBloc(),
-      child: BlocExample(),
-    ));
+          create: (_) => ExampleBloc(),
+          child: BlocExample(),
+        ));
   }
 }
 

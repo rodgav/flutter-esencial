@@ -20,6 +20,7 @@ dev_dependencies:
 data/client/dio.dart
 ```dart
 import 'package:dio/dio.dart';
+import 'package:mvvm/app/strings.dart' show AppStrings;
 
 Dio getDio() {
   final dio = Dio(BaseOptions(
@@ -41,9 +42,9 @@ class AppStrings {
 
 data/service/api_service.dart
 ```dart
-import 'package:clean_mvvm/app/app_strings.dart';
-import 'package:clean_mvvm/data/response/task_response.dart';
 import 'package:dio/dio.dart';
+import 'package:mvvm/app/strings.dart' show AppStrings;
+import 'package:mvvm/data/response/task_response.dart' show TaskResponse;
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
@@ -81,10 +82,9 @@ o
 `fvm flutter packages run build_runner  build`
 
 data/data_source/remote_data_source.dart
-
 ```dart
-import 'package:clean_mvvm/data/response/task_response.dart';
-import 'package:clean_mvvm/data/service/api_service.dart';
+import 'package:mvvm/data/response/task_response.dart' show TaskResponse;
+import 'package:mvvm/data/service/api_service.dart' show ApiService;
 
 abstract class RemoteDataSource {
   Future<List<TaskResponse>> getTasks();
@@ -107,5 +107,6 @@ final dio = getDio();
   getIt.registerLazySingleton<Dio>(() => dio);
   getIt.registerLazySingleton<ApiService>(() => ApiService(getIt<Dio>()));
   getIt.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(getIt<ApiService>()));
+    () => RemoteDataSourceImpl(getIt<ApiService>()),
+  );
 ```

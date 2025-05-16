@@ -17,7 +17,7 @@ flutter:
     - assets/images/image.png
 ```
 
-Ejemplo de una Text
+Ejemplo de una image
 ```dart
    Image.asset(
           'assets/images/image.png',

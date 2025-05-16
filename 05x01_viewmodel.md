@@ -10,7 +10,7 @@ dependencies:
   rxdart: ^0.27.7
 ```
 
-presentation/base_viewmodel.dart
+view/base_viewmodel.dart
 ```dart
 abstract class BaseViewModel {
   void start() {}
@@ -19,15 +19,44 @@ abstract class BaseViewModel {
 }
 ```
 
-presetantion/tasks/tasks_viewmodel.dart
+view/model/task.dart
 ```dart
-import 'package:clean_mvvm/domain/mapper/task_model_mapper.dart';
-import 'package:clean_mvvm/domain/model/failure_model.dart';
-import 'package:clean_mvvm/domain/model/task_model.dart';
-import 'package:clean_mvvm/domain/usecase/get_tasks_usecase.dart';
-import 'package:clean_mvvm/presentation/base_viewmodel.dart';
-import 'package:clean_mvvm/presentation/model/task.dart';
+class Task {
+  final String id;
+  final String name;
+
+  Task({required this.id, required this.name});
+}
+
+```
+
+domain/mapper/task_model_mapper.dart
+```dart
+import 'package:mvvm/domain/model/task_model.dart' show TaskModel;
+import 'package:mvvm/view/model/task.dart';
+
+extension TasksResponseExtension on List<TaskModel>? {
+  List<Task> toView() =>
+      this?.map((e) => e.toView()).toList() ?? List.empty();
+}
+
+extension TaskResponseExtension on TaskModel? {
+  Task toView() {
+    return Task(id: this?.id ?? '', name: this?.name ?? '');
+  }
+}
+```
+
+view/tasks/tasks_viewmodel.dart
+```dart
+import 'package:mvvm/domain/mapper/task_model_mapper.dart';
+import 'package:mvvm/domain/model/failure_model.dart' show FailureModel;
+import 'package:mvvm/domain/model/task_model.dart' show TaskModel;
+import 'package:mvvm/domain/usecase/usecase/get_tasks_usecase.dart'
+    show GetTasksUseCase;
+import 'package:mvvm/view/model/task.dart' show Task;
 import 'package:rxdart/rxdart.dart';
+import 'package:mvvm/view/base_viewmodel.dart';
 
 class TasksViewModel extends BaseViewModel
     with TasksViewModelInput, TasksViewModelOutput {
@@ -61,9 +90,10 @@ class TasksViewModel extends BaseViewModel
 
   @override
   Future<void> getTasks() async {
-    (await _getTasksUseCase.execute(null)).fold(
-        (FailureModel l) => _tasksInput.add(List.empty()),
-        (List<TaskModel> r) => _tasksInput.add(r.toPresentation()));
+    (await _getTasksUseCase.execute(null)).when(
+      left: (FailureModel l) => _tasksInput.add(List.empty()),
+      right: (List<TaskModel> r) => _tasksInput.add(r.toView()),
+    );
   }
 }
 

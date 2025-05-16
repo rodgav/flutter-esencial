@@ -4,6 +4,11 @@
 
 ## ChangeNotifier
 
+```yaml
+  dependencies:
+    provider: ^6.1.5
+```
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

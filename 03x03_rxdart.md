@@ -4,6 +4,10 @@
 
 ## RxDart
 
+```yaml
+dependencies:
+  rxdart: ^0.28.0
+```
 ```dart
 class StreamExample extends StatefulWidget {
   const StreamExample({super.key});

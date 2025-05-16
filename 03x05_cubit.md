@@ -4,6 +4,11 @@
 
 ## Cubit
 
+```yaml
+dependencies:
+  flutter_bloc: ^9.1.1
+```
+
 Primero saber que `cubit` tiene 3 elementos: cubit, state y la vista.
 
 el archivo `example_cubit.dart`

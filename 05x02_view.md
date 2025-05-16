@@ -7,12 +7,12 @@
 ## View
 
 
-presentation/tasks_view.dart
+view/task/tasks_view.dart
 ```dart
-import 'package:clean_mvvm/app/dependency_injection/dependency_injection.dart';
-import 'package:clean_mvvm/presentation/model/task.dart';
-import 'package:clean_mvvm/presentation/tasks/tasks_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm/app/dependency_injection.dart' show getIt;
+import 'package:mvvm/view/model/task.dart' show Task;
+import 'package:mvvm/view/tasks/tasks_viewmodel.dart' show TasksViewModel;
 
 class TasksView extends StatefulWidget {
   const TasksView({super.key});
@@ -52,15 +52,15 @@ class _TasksViewState extends State<TasksView> {
           }
           return tasks.isNotEmpty
               ? ListView.builder(
-                  itemBuilder: (_, index) {
-                    final task = tasks[index];
-                    return ListTile(title: Text(task.name));
-                  },
-                  itemCount: tasks.length,
-                )
+            itemBuilder: (_, index) {
+              final task = tasks[index];
+              return ListTile(title: Text(task.name));
+            },
+            itemCount: tasks.length,
+          )
               : const Center(
-                  child: Text('No data'),
-                );
+            child: Text('No data'),
+          );
         },
       ),
     );

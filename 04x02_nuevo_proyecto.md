@@ -3,6 +3,7 @@
 
 
 ```yaml
+dependencies:
   get_it: ^7.6.4
   go_router: ^12.1.0
 ```
@@ -28,27 +29,35 @@ class Routes {
 
 app/router/router_manager.dart
 ```dart
-import 'package:clean_mvvm/app/route/routes.dart';
-import 'package:clean_mvvm/home_view.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mvvm/app/router/routes.dart' show Routes;
+import 'package:flutter/material.dart';
 
 class RouterManager {
-  static GoRouter router = GoRouter(routes: [
-    GoRoute(
+  static GoRouter router = GoRouter(
+    routes: [
+      GoRoute(
         name: Routes.home,
         path: Routes.home,
         builder: (context, state) {
-          return const HomeView();
-        }),
-  ], initialLocation: Routes.home, debugLogDiagnostics: true);
+          //aqui podemos poner cualquier vista o widget
+          return const Scaffold();
+          //return const HomeView();
+        },
+      ),
+    ],
+    initialLocation: Routes.home,
+    debugLogDiagnostics: true,
+  );
 }
+
 
 ```
 
 app/application.dart
 ```dart
-import 'package:clean_mvvm/app/route/route.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm/app/router/router_manager.dart' show RouterManager;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -71,9 +80,9 @@ class MyApp extends StatelessWidget {
 
 main.dart
 ```dart
-import 'package:clean_mvvm/app/aplication.dart';
-import 'package:clean_mvvm/app/dependency_injection/dependency_injection.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm/app/application.dart' show MyApp;
+import 'package:mvvm/app/dependency_injection.dart' show initModule;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
